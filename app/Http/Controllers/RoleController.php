@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use Response;
 
 class RoleController extends Controller
 {
@@ -15,7 +16,7 @@ class RoleController extends Controller
        $data = [
          'roles'=>Role::all()
        ];
-       return $data['roles'];
+       return response()->json(['results'=>$data['roles']]);
     }
 
     /**
@@ -43,8 +44,12 @@ class RoleController extends Controller
 	 */
     public function delete($id)
     {
-       $role = Role::find($id);
-       $role->delete();
-       return redirect()->to('/roles');
+       try{
+         $role = Role::findOrFail($id);
+         $role->delete();
+         return redirect()->to('/roles');
+       }catch(Exception $e){
+         return "Role is not found";
+       }
     }
 }

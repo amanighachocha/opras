@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/roles','RoleController@index')->middleware('auth');
+Route::get('/roles','RoleController@index');
 Route::get('/roles/store','RoleController@store');
-Route::get('/roles/{id}/delete','RoleController@delete')->middleware('auth');
+Route::get('/roles/{id}/delete','RoleController@delete');
 Route::post('authenticate','SessionController@store');
 
 Auth::routes();
