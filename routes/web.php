@@ -12,14 +12,16 @@
 */
 
 Route::get('/', function () {
+	App::setLocale('en');
     return view('welcome');
 });
 
-Route::get('/roles','RoleController@index');
-Route::get('/roles/store','RoleController@store');
-Route::get('/roles/{id}/delete','RoleController@delete');
+Route::get('roles','RoleController@index');
+Route::get('roles/store','RoleController@store');
+Route::get('roles/{id}/delete','RoleController@delete');
 Route::post('authenticate','SessionController@store');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('targets/store','TargetController@store');
