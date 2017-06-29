@@ -22,6 +22,28 @@ class UsersTableSeeder extends Seeder
               'department_id'=>1,
               'created_at'=>new DateTime,
               'updated_at'=>new DateTime
+           ],
+
+           [
+              'id'=>2,
+              'first_name'=>'Martin',
+              'last_name'=>'Lyuba',
+              'email'=>'lyuba@ifm.ac.tz',
+              'password'=>Hash::make('admin123'),
+              'department_id'=>2,
+              'created_at'=>new DateTime,
+              'updated_at'=>new DateTime
+           ],
+
+           [
+              'id'=>3,
+              'first_name'=>'Vero',
+              'last_name'=>'Mpombo',
+              'email'=>'vero@ifm.ac.tz',
+              'password'=>Hash::make('admin123'),
+              'department_id'=>2,
+              'created_at'=>new DateTime,
+              'updated_at'=>new DateTime
            ]
            
         ];

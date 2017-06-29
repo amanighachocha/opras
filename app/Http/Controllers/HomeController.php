@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User, App\Department, App\Role, App\Target, App\Report, App\SubTarget;
+use DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $data = [
+        //    'targets'=>Target::find(1)->reports
+        // ];
+        // return $data['targets'];
+        return User::with('reports')->get();
+
     }
 }

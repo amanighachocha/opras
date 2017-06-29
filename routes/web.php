@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-	App::setLocale('en');
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('roles','RoleController@index');
 Route::get('roles/store','RoleController@store');

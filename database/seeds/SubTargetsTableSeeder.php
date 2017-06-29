@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Department;
+use App\SubTarget;
 
-class DepartmentsTableSeeder extends Seeder
+class SubTargetsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,29 +12,36 @@ class DepartmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $departments = [
+        $targets = [
            [
              'id'=>1,
-             'name'=>'Computer Science',
+             'name'=>'Configure server',
+             'target_id'=>1,
+             'user_id'=>3,
              'created_at'=>new DateTime,
              'updated_at'=>new DateTime
            ],
 
            [
              'id'=>2,
-             'name'=>'Accounting',
+             'name'=>'Run Unit tests',
+             'target_id'=>1,
+             'user_id'=>2,
              'created_at'=>new DateTime,
              'updated_at'=>new DateTime
            ],
 
            [
              'id'=>3,
-             'name'=>'Banking',
+             'name'=>'Compile department budgets',
+             'target_id'=>2,
+             'user_id'=>2,
              'created_at'=>new DateTime,
              'updated_at'=>new DateTime
            ]
         ];
 
-        Department::insert($departments);
+        SubTarget::insert($targets);
+
     }
 }

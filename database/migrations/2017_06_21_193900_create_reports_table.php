@@ -17,7 +17,9 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
-            $table->integer('sub_target_id')->references('sub_targets');
+            $table->integer('user_id')->references('users');
+            $table->integer('reportable_id')->references('targets')->references('sub_targets');
+            $table->string('reportable_type');
             $table->timestamps();
         });
     }
