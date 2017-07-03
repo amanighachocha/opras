@@ -31,4 +31,12 @@ class SubTarget extends Model
     {
         return $this->morphMany('App\Report','reportable');
     }
+
+    /**
+     * Establish many to many polymorphic relationship with users as assignees
+     */
+    public function assignedUsers()
+    {
+    	return $this->morphToMany('App\User','target_assignments','assignable','user_id');
+    }
 }

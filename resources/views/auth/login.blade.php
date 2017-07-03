@@ -7,11 +7,27 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    {!! Form::open(['url'=>'authenticate','role'=>'form','class'=>'form-horizontal']) !!}
+
+                  @if(count($errors) != 0)
+                   <div class="alert alert-warning alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      @foreach($errors as $error)
+                       <p>{{ $error->message }}</p>
+                      @endforeach
+                    </div>
+                  @endif
+
+                  @if(Session::has('error_message'))
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p>{{ Session::get('error_message') }}</p>
+                    </div>
+                  @endif
                     
 
-       
-
+                    {!! Form::open(['url'=>'authenticate','role'=>'form','class'=>'form-horizontal']) !!}
+                    
+                       
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -19,11 +35,6 @@
                                 <!-- <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus> -->
                                 {!! Form::email('email',old('email'),['class'=>'form-control','required'=>true,'autofocus'=>true]) !!}
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -34,11 +45,6 @@
                                 <!-- <input id="password" type="password" class="form-control" name="password" required> -->
                                 {!! Form::password('password',['class'=>'form-control','required'=>true]) !!}
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -53,11 +59,7 @@
                                     </label>
                                 </div>
 
-                                @if(!is_null(Session::get('error_message')))
-                                  <span class="help-block">
-                                        <strong>{{ Session::get('error_message') }}</strong>
-                                    </span>
-                                @endif
+                                
                             </div>
                         </div>
 
@@ -67,12 +69,13 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ url('password.request') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>
                         </div>
                     }
+
                     {!! Form::close() !!}
                 </div>
             </div>

@@ -40,7 +40,7 @@ class User extends Authenticatable
     /**
      * Establish one to many relationship with targets
      */
-    public function targets()
+    public function setTargets()
     {
         return $this->hasMany('App\Target','user_id');
     }
@@ -76,6 +76,22 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        $this->belongsToMany('App\Role','user_accounts','user_id','role_id');
+        return $this->belongsToMany('App\Role','user_accounts','user_id','role_id');
+    }
+
+    /** 
+     * Establish many to many polymorphic relationship with targets as assignee of targets
+     */
+    public function assignable()
+    {
+        return $this->morphToMany();
+    }
+
+    /**
+     * Access the username using accessor
+     */
+    public function getUsernameAttribute($value)
+    {
+        return $this->first_name.' '.$this->last_name;
     }
 }

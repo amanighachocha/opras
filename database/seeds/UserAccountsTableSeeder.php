@@ -35,6 +35,14 @@ class UserAccountsTableSeeder extends Seeder
                'role_id'=>3,
                'created_at'=>new DateTime,
                'updated_at'=>new DateTime
+            ],
+
+            [
+               'id'=>4,
+               'user_id'=>1,
+               'role_id'=>3,
+               'created_at'=>new DateTime,
+               'updated_at'=>new DateTime
             ]
         ];
 

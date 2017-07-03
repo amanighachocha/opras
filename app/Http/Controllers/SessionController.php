@@ -4,9 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator, Response, Session, Auth, Hash;
+use AuthenticationException;
+use App\User, App\Role;
 
 class SessionController extends Controller
 {
+	/**
+	 * Display login form
+	 */
+	public function index()
+	{
+       return view('dashboard.home')->withTitle('Dashboard');
+	}
+
+	/**
+	 * Display login form
+	 */
+	public function create()
+	{
+       return view('auth.login')->withTitle('Login');
+	}
+    
+    /**
+     * Autheticate user
+     */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -26,14 +47,23 @@ class SessionController extends Controller
         }else{
         	Auth::attempt($credentials);
         }
-        
+  
         if(Auth::check()){
-        	return Auth::user();
+        	return redirect()->to('dashboard');
         }else{
         	Session::flash('error_message','Incorrect email or password');
         	return redirect()->back()->withInput();
         }
+    }
 
-
+    /**
+     * Destroy session
+     */
+    public function destroy()
+    {
+    	if(Auth::check()){
+    		Auth::logout();
+    	}
+    	return redirect()->to('signin');
     }
 }

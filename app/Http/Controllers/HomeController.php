@@ -26,11 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $data = [
-        //    'targets'=>Target::find(1)->reports
-        // ];
-        // return $data['targets'];
-        return User::with('reports')->get();
-
+       return view('index')->withTitle('Home');
     }
 }
