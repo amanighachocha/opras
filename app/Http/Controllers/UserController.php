@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\User, App\Role, App\Permission;
+use Validator, Response, Session, Auth, Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +14,8 @@ class UserController extends Controller
 	public function index()
 	{
         $data = [
-           'users'=>User::all()
+           'users'=>User::with('roles')->paginate(2),
+           'permissions'=>Permission::all()
         ];
         return view('dashboard.users',$data)->withTitle('Users');
 	}

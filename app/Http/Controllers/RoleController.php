@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
-use Response;
+use App\Role, App\Permission;
+use Validator, Response, Session, Auth, Hash;
 
 class RoleController extends Controller
 {
@@ -14,9 +14,21 @@ class RoleController extends Controller
     public function index()
     {
        $data = [
-         'roles'=>Role::all()
+         'roles'=>Role::all(),
+         'permissions'=>Permission::all()
        ];
-       return $data['roles'];
+       return view('dashboard.roles',$data)->withTitle('Roles');
+    }
+
+    public function attachPermissions(Request $request)
+    {
+       foreach (Permission::all() as $key => $permit) {
+          if($permit->id = $request->input($permit->id)){
+             Role::find($request->input('role_id'))->attachPermission($permit);
+          }
+       }
+       Session::flash('success_message','Permissions saved successfully');
+       return redirect()->back();
     }
 
     /**
@@ -25,7 +37,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role = new Role;
-        $role->name = 'Teacher';
+        $role->name = $request->input('name');
         $role->key = 'teacher';
         $role->save();
         return redirect()->to('/roles');

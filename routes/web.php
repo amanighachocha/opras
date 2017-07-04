@@ -13,26 +13,29 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('signin', 'SessionController@create');
-Route::middleware('web')->post('signout', 'SessionController@destroy');
+Route::get('signout', 'SessionController@destroy');
 Route::get('signup', 'UserController@create');
 Route::middleware('web')->post('authenticate', 'SessionController@store');
 
 
 Route::get('dashboard', 'SessionController@index');
 
+// Users management routes
 Route::get('users', 'UserController@index');
 Route::get('users/{id}/edit', 'UserController@edit');
 Route::post('users/store', 'UserController@store');
 Route::post('users/update', 'UserController@update');
+// End of users management routes
 
-// Route::resource('session','SessionController');
+// Roles and permissions management routes
+Route::get('roles', 'RoleController@index');
+Route::get('roles/{id}/edit', 'RoleController@edit');
+Route::post('roles/store', 'RoleController@store');
+Route::post('roles/update', 'RoleController@update');
+Route::post('roles/permissions/store','RoleController@attachPermissions');
+// End of roles and permissions management routes
 
-// Route::get('roles','RoleController@index');
-// Route::get('roles/store','RoleController@store');
-// Route::get('roles/{id}/delete','RoleController@delete');
-// Route::post('authenticate','SessionController@store');
 
 Auth::routes();
 
-// Route::get('home', 'HomeController@index')->name('home');
-// Route::get('targets/store','TargetController@store');
+

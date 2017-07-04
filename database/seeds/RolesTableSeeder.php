@@ -15,32 +15,32 @@ class RolesTableSeeder extends Seeder
         $roles = [
             [
                'id'=>1,
-               'name'=>'Administrator',
-               'key'=>'admin',
+               'display_name'=>'Administrator',
+               'name'=>'admin',
                'created_at'=>new DateTime,
                'updated_at'=>new DateTime
             ],
 
             [
                'id'=>2,
-               'name'=>'Director',
-               'key'=>'director',
+               'display_name'=>'Director',
+               'name'=>'director',
                'created_at'=>new DateTime,
                'updated_at'=>new DateTime
             ],
 
             [
                'id'=>3,
-               'name'=>'Manager',
-               'key'=>'manager',
+               'display_name'=>'Manager',
+               'name'=>'manager',
                'created_at'=>new DateTime,
                'updated_at'=>new DateTime
             ],
 
             [
                'id'=>4,
-               'name'=>'Employee',
-               'key'=>'employee',
+               'display_name'=>'Employee',
+               'name'=>'employee',
                'created_at'=>new DateTime,
                'updated_at'=>new DateTime
             ]

@@ -9,10 +9,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'OPRAS') }} | {{ $title }}</title>
+    <title>{{ config('app.name', 'OPRAS') }} @if(isset($title)) | {{ $title }} @endif</title>
 
     <!-- Styles -->
-    {!! Html::style('css/app.css') !!}
+    {!! Html::style('css/bootstrap.min.css') !!}
+    {!! Html::style('css/bootstrap-theme.min.css') !!}
+    {!! Html::style('css/style.css') !!}
 </head>
 <body>
     <div id="app">
@@ -47,7 +49,7 @@
                         <li><a href="{{ url('/') }}">FAQ</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('signin') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
                             <!-- <li><a href="{{ url('signup') }}">Register</a></li> -->
                         @else
                             <li class="dropdown">
@@ -57,13 +59,13 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('signout') }}"
+                                        <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ url('signout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
@@ -80,6 +82,7 @@
     </div>
 
     <!-- Scripts -->
-    {!! Html::script('js/app.js'); !!}
+    {!! Html::script('js/jquery-3.2.1.min.js') !!}
+    {!! Html::script('js/bootstrap.min.js') !!}
 </body>
 </html>

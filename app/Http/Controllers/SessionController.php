@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator, Response, Session, Auth, Hash;
+use Validator, Response, Session, Auth, Hash, Session;
 use AuthenticationException;
 use App\User, App\Role;
 

@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TargetsTableSeeder::class);
         $this->call(SubTargetsTableSeeder::class);
         $this->call(ReportsTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
     }
 }
