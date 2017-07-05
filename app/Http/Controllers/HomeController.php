@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User, App\Department, App\Role, App\Target, App\Report, App\SubTarget;
-use DB;
+use App\Events\TargetAssigned;
+use DB, Mail;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -26,6 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-       return view('index')->withTitle('Home');
+       return view('index')->withTitle('Home');  
     }
 }

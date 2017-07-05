@@ -14,7 +14,7 @@ class Role extends EntrustRole
      */
     public function users()
     {
-        $this->belongsToMany('App\User','user_accounts','role_id','user_id');
+        return $this->belongsToMany('App\User','user_accounts','role_id','user_id');
     }
 
     /*

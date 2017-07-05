@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator, Response, Session, Auth, Hash, Session;
+use Validator, Response, Auth, Hash;
 use AuthenticationException;
 use App\User, App\Role;
 
@@ -51,7 +51,7 @@ class SessionController extends Controller
         if(Auth::check()){
         	return redirect()->to('dashboard');
         }else{
-        	Session::flash('error_message','Incorrect email or password');
+        	session()->flash('error_message','Incorrect email or password');
         	return redirect()->back()->withInput();
         }
     }

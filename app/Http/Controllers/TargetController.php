@@ -7,6 +7,7 @@ use App\Target;
 use App\Events\TargetAssigned;
 use App\Jobs\RemindReportSubmission;
 use Artisan;
+use Validator, Response, Session, Auth, Hash;
 
 class TargetController extends Controller
 {
@@ -23,16 +24,31 @@ class TargetController extends Controller
      */
     public function store(Request $request)
     {
-        // $target = new Target;
-        // $target->user_id = 1;
-        // $target->name = 'Configure server';
-        // $target->save();
+    	$validation = Validator::make($request->all(),[
+                 'name'=>'required|string'      
+    		]);
+    	if($validation->fails()){
+    		if($request->ajax()){
+               return response()->json(['success'=>false,'message'=>$validation->messages()]);
+    		}else{
+               return redirect()->back()->withInput()->with($validation->messages());
+    		}
+    	}
 
-        // // $result = event(new TargetAssigned($target));
-        // $job = (new RemindReportSubmission)->delay(10);
-        // $result = dispatch($job);
+        $target = new Target;
+        $target->user_id = $request->input('user_id');
+        $target->name = $request->input('name');
+        $target->description = $request->input('description');
+        $target->save();
 
-        // return $result;
-        return Artisan::call('make:controller',['name'=>'ReportController']);
+        event(new TargetAssigned($target));
+
+        if($request->ajax()){
+	       return response()->json(['success'=>false,'message'=>'Target saved successfully']);
+		}else{
+		   session()->flash('success_message'=>'Target saved successfully');
+	       return redirect()->back();
+		}
+
     }
 }

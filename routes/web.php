@@ -17,23 +17,45 @@ Route::get('signout', 'SessionController@destroy');
 Route::get('signup', 'UserController@create');
 Route::middleware('web')->post('authenticate', 'SessionController@store');
 
+Route::middleware(['auth'])->group(function () {
+	Route::get('dashboard', 'SessionController@index');
 
-Route::get('dashboard', 'SessionController@index');
+	// Users management routes
+	Route::get('users', 'UserController@index');
+	Route::get('users/{id}/edit', 'UserController@edit');
+	Route::post('users/store', 'UserController@store');
+	Route::post('users/update', 'UserController@update');
+	// End of users management routes
 
-// Users management routes
-Route::get('users', 'UserController@index');
-Route::get('users/{id}/edit', 'UserController@edit');
-Route::post('users/store', 'UserController@store');
-Route::post('users/update', 'UserController@update');
-// End of users management routes
+	// Roles and permissions management routes
+	Route::get('roles', 'RoleController@index');
+	Route::get('roles/{id}/edit', 'RoleController@edit');
+	Route::post('roles/store', 'RoleController@store');
+	Route::post('roles/update', 'RoleController@update');
+	Route::post('roles/permissions/store','RoleController@attachPermissions');
+	// End of roles and permissions management routes
 
-// Roles and permissions management routes
-Route::get('roles', 'RoleController@index');
-Route::get('roles/{id}/edit', 'RoleController@edit');
-Route::post('roles/store', 'RoleController@store');
-Route::post('roles/update', 'RoleController@update');
-Route::post('roles/permissions/store','RoleController@attachPermissions');
-// End of roles and permissions management routes
+	// Users management routes
+	Route::get('reports', 'ReportController@index');
+	Route::get('reports/{id}/edit', 'ReportController@edit');
+	Route::get('reports/{id}/download', 'ReportController@download');
+	Route::post('reports/store', 'ReportController@store');
+	Route::post('reports/update', 'ReportController@update');
+	// End of users management routes
+});
+
+Route::middleware(['auth','admin'])->group(function () {
+
+	// Roles and permissions management routes
+	Route::get('roles', 'RoleController@index');
+	Route::get('roles/{id}/edit', 'RoleController@edit');
+	Route::post('roles/store', 'RoleController@store');
+	Route::post('roles/update', 'RoleController@update');
+	Route::post('roles/permissions/store','RoleController@attachPermissions');
+	// End of roles and permissions management routes
+});
+
+
 
 
 Auth::routes();
